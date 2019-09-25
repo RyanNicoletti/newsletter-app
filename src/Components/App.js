@@ -8,6 +8,7 @@ import "./FetchDataFromRssFeed.css";
 import NotFoundPage from "./NotFoundPage";
 import Login from "./Login";
 import CreateAccount from "./CreateAccount";
+import HomePage from "./HomePage";
 
 export default class App extends React.Component {
     render() {
@@ -16,17 +17,17 @@ export default class App extends React.Component {
                 <nav>
                     <NavBar />
                 </nav>
-                <main className="rss-input">
+                <main className="app">
                     <Switch>
-                        <Route
-                            exact
-                            path="/"
-                            component={FetchDataFromRssFeed}
-                        />
+                        <Route exact path="/" component={HomePage} />
                         <Route path="/Login" component={Login} />
                         <Route
                             path="/CreateAccount"
                             component={CreateAccount}
+                        />
+                        <Route
+                            path="/FetchDataFromRssFeed"
+                            component={FetchDataFromRssFeed}
                         />
 
                         <Route component={NotFoundPage} />

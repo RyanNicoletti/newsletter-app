@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import FetchDataFromRssFeed from "./FetchDataFromRssFeed";
+import { Route } from "react-router-dom";
 
 export default class LoginForm extends Component {
     static defaultProps = {
@@ -17,6 +19,10 @@ export default class LoginForm extends Component {
         user_name.value = "";
         password.value = "";
         this.props.onLoginSuccess();
+    };
+
+    routeToUsersFeed = () => {
+        this.props.history.push("/FetchDataFromRssFeed");
     };
 
     render() {
@@ -38,7 +44,10 @@ export default class LoginForm extends Component {
                         id="LoginForm__password"
                     ></input>
                 </div>
-                <button type="submit">Login</button>
+
+                <button type="submit" onClick={this.routeToUsersFeed}>
+                    Login
+                </button>
             </form>
         );
     }

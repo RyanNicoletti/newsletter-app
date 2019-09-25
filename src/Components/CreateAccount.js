@@ -2,31 +2,36 @@ import React from "react";
 import ValidationErrorMessage from "./ValidationErrorMessage";
 
 export default class CreateAccount extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             email: {
-                value: ""
+                value: "",
+                touched: false
             },
             password: {
-                value: ""
+                value: "",
+                touched: false
             },
             repeatPassword: {
-                value: ""
+                value: "",
+                touched: false
             }
         };
     }
 
     handleEmailChange(email) {
-        this.setState({ email: { value: email } });
+        this.setState({ email: { value: email, touched: true } });
     }
 
     handlePasswordChange(password) {
-        this.setState({ password: { value: password } });
+        this.setState({ password: { value: password, touched: true } });
     }
 
     handleRepeatPasswordChange(repeatPassword) {
-        this.setState({ repeatPassword: { value: repeatPassword } });
+        this.setState({
+            repeatPassword: { value: repeatPassword, touched: true }
+        });
     }
 
     handleSubmit(e) {
@@ -65,6 +70,10 @@ export default class CreateAccount extends React.Component {
         }
     }
 
+    routeToUsersFeed = () => {
+        this.props.history.push("/FetchDataFromRssFeed");
+    };
+
     render() {
         const emailError = this.validateEmail();
         const passwordError = this.validatePassword();
@@ -83,11 +92,11 @@ export default class CreateAccount extends React.Component {
                         id="email"
                         onChange={e => this.handleEmailChange(e.target.value)}
                     />
-                    {
+                    {this.state.email.touched && (
                         <ValidationErrorMessage
-                            message={this.validateEmail()}
+                            message={emailError}
                         ></ValidationErrorMessage>
-                    }
+                    )}
                 </div>
                 <div className="form-grup">
                     <label htmlFor="password">Password *</label>
@@ -104,6 +113,9 @@ export default class CreateAccount extends React.Component {
                     <div className="registration-form-hint">
                         6 to 70 characters, must include a number
                     </div>
+                    {this.state.password.touched && (
+                        <ValidationErrorMessage message={passwordError} />
+                    )}
                 </div>
                 <div className="form-group">
                     <label htmlFor="repeatPassword">Repeat Password *</label>
@@ -117,6 +129,9 @@ export default class CreateAccount extends React.Component {
                             this.handleRepeatPasswordChange(e.target.value)
                         }
                     />
+                    {this.state.repeatPassword.touched && (
+                        <ValidationErrorMessage message={repeatPasswordError} />
+                    )}
                 </div>
                 <div className="registration-button-group">
                     <button
@@ -125,8 +140,9 @@ export default class CreateAccount extends React.Component {
                         disabled={
                             this.validateEmail() ||
                             this.validatePassword() ||
-                            this.validateRepeatPasword()
+                            this.validateRepeatPassword()
                         }
+                        onClick={this.routeToUsersFeed}
                     >
                         Create Account
                     </button>
