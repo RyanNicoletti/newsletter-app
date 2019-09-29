@@ -1,56 +1,67 @@
 import React, { Component } from "react";
-import FetchDataFromRssFeed from "./FetchDataFromRssFeed";
-import { Route } from "react-router-dom";
 
-export default class LoginForm extends Component {
-    static defaultProps = {
-        onLoginSuccess: () => {}
-    };
+export default class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: {
+                value: "",
+                touched: false
+            },
+            password: {
+                value: "",
+                touched: false
+            }
+        };
+    }
 
-    state = { error: null };
-
-    handleSubmitBasicAuth = ev => {
-        ev.preventDefault();
-        const { user_name, password } = ev.target;
-
-        console.log("login form submitted");
-        console.log({ user_name, password });
-
-        user_name.value = "";
-        password.value = "";
-        this.props.onLoginSuccess();
-    };
-
+    handleEmailChange(email) {
+        this.setState({ username: { value: email, touched: true } });
+    }
+    handlePasswordChange(password) {
+        this.setState({ password: { value: password, touched: true } });
+    }
     routeToUsersFeed = () => {
         this.props.history.push("/FetchDataFromRssFeed");
     };
-
     render() {
-        const { error } = this.state;
         return (
-            <form className="LoginForm">
-                <div role="alert">
-                    {error && <p className="red">{error}</p>}
-                </div>
-                <div className="user_name">
-                    <label htmlFor="LoginForm__user_name">User name</label>
-                    <input name="user_name" id="LoginForm__user_name"></input>
-                </div>
-                <div className="password">
-                    <label htmlFor="LoginForm__password">Password</label>
+            <form className="login">
+                <h2>Login</h2>
+                <div className="form-group">
+                    <label htmlFor="username">Email</label>
                     <input
-                        name="password"
-                        type="password"
-                        id="LoginForm__password"
-                    ></input>
+                        type="email"
+                        value={this.state.username.value}
+                        className="login-input"
+                        name="email"
+                        id="email"
+                        onChange={e => this.handleEmailChange(e.target.value)}
+                    />
                 </div>
-
-                <button type="submit" onClick={this.routeToUsersFeed}>
-                    Login
-                </button>
+                <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input
+                        type="password"
+                        value={this.state.password.value}
+                        className="login=input"
+                        name="password"
+                        id="password"
+                        onChange={e =>
+                            this.handlePasswordChange(e.target.value)
+                        }
+                    />
+                </div>
+                <div className="login-button">
+                    <button
+                        type="submit"
+                        className="login-button"
+                        onClick={this.routeToUsersFeed}
+                    >
+                        Login
+                    </button>
+                </div>
             </form>
         );
     }
 }
-
-// form validation: onSubmit={this.handleSubmitBasicAuth}

@@ -1,3 +1,8 @@
-.main-app {
+.app {
+    margin-top: 100px;
+    box-sizing: border-box;
+}
+.rss-input-component {
     display: flex;
+    justify-content: center;
 }

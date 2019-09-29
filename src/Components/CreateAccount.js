@@ -98,7 +98,7 @@ export default class CreateAccount extends React.Component {
                         ></ValidationErrorMessage>
                     )}
                 </div>
-                <div className="form-grup">
+                <div className="form-group">
                     <label htmlFor="password">Password *</label>
                     <input
                         type="password"

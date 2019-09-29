@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./FetchDataFromRssFeed.css";
 
 export default class FetchDataFromRssFeed extends Component {
     constructor() {
@@ -31,28 +32,41 @@ export default class FetchDataFromRssFeed extends Component {
 
     render() {
         console.log(this.state);
-        const arrayOfNewsLetters = this.state.items.map((item, i) => (
-            <li key={i}>
-                {item.title} <br></br>
-                <a href={item.link}>{item.link}</a>
-            </li>
-        ));
+        const arrayOfNewsLetters = this.state.items
+            .slice(0, 4)
+            .map((item, i) => (
+                <div className="newsletter-card">
+                    <li key={i} className="item-title">
+                        {item.title} <br></br>
+                        <a className="item-link" href={item.link}>
+                            {item.link}
+                        </a>
+                    </li>
+                </div>
+            ));
         return (
-            <>
+            <div className="rss-form">
                 <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="RSSURL">
-                        Add an RSS Feed URL from Your Favorite Newsletters:
+                    <div className="label-input-wrapper">
+                        <label htmlFor="RSSURL">
+                            Add an RSS Feed URL from Your Favorite Newsletters:
+                        </label>
                         <input
                             type="text"
                             value={this.state.value}
                             onChange={this.handleChange}
                         />
-                    </label>
+                        <button
+                            type="submit"
+                            className="fetch-newsletter-button"
+                        >
+                            Get News Letter
+                        </button>
+                    </div>
                 </form>
-                <ul>{arrayOfNewsLetters}</ul>
-            </>
+
+                <ul className="newsletter-list">{arrayOfNewsLetters}</ul>
+            </div>
         );
     }
 }
-
-// array.slice

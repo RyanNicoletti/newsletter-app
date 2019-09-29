@@ -13,11 +13,11 @@ import HomePage from "./HomePage";
 export default class App extends React.Component {
     render() {
         return (
-            <div className="main-app">
+            <div className="app">
                 <nav>
                     <NavBar />
                 </nav>
-                <main className="app">
+                <main>
                     <Switch>
                         <Route exact path="/" component={HomePage} />
                         <Route path="/Login" component={Login} />
@@ -25,10 +25,12 @@ export default class App extends React.Component {
                             path="/CreateAccount"
                             component={CreateAccount}
                         />
-                        <Route
-                            path="/FetchDataFromRssFeed"
-                            component={FetchDataFromRssFeed}
-                        />
+                        <div className="rss-input-component">
+                            <Route
+                                path="/FetchDataFromRssFeed"
+                                component={FetchDataFromRssFeed}
+                            />
+                        </div>
 
                         <Route component={NotFoundPage} />
                     </Switch>
