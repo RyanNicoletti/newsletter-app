@@ -6,3 +6,7 @@
     display: flex;
     justify-content: center;
 }
+
+.top-nav {
+    margin-bottom: 60px;
+}

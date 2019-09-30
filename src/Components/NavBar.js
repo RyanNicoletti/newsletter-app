@@ -1,54 +1,72 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import "./NavBar.css";
 
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isClicked: false };
+        this.state = { navBar_class: "" };
     }
 
-    openMenu(event) {
-        event.preventDefault();
-        const previousMenuState = this.state.isClicked;
-        this.setState({ isClicked: !previousMenuState });
-    }
+    setToggleNavBarClass = e => {
+        e.preventDefault();
+        if (this.state.navBar_class === "") {
+            this.setState({ navBar_class: "toggled" });
+        } else {
+            this.setState({ navBar_class: "" });
+        }
+    };
 
     render() {
+        let topNavBarClass = `top-menu-${this.state.navBar_class}`;
         return (
-            <div className="navbar">
-                <nav className="nav">
-                    <div className="hamburger-container" id="hamburger-menu">
-                        <button
-                            className="hamburger"
-                            onClick={event => this.openMenu(event)}
-                        >
-                            <div className="hamburger-line"></div>
-                            <div className="hamburger-line"></div>
-                            <div className="hamburger-line"></div>
-                        </button>
-                    </div>
+            <nav className="nav-container">
+                <div className={topNavBarClass}>
+                    <ul className="nav-item-list">
+                        <li>
+                            <Link className="nav-links" to="/">
+                                Home
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="nav-links" to="/Createaccount">
+                                Create Account
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="nav-links" to="/Login">
+                                Login
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+                <FontAwesomeIcon
+                    icon={faBars}
+                    size="lg"
+                    className="top-menu-icon"
+                    onClick={e => this.setToggleNavBarClass(e)}
+                />
 
-                    <div className="navbar-logo">Weekly NewsFeed</div>
-                    <div className="flex-space" />
-                    <div
-                        className={
-                            !this.state.isClicked ? "nav-items" : "display-menu"
-                        }
-                    >
-                        <ul>
-                            <li>
-                                <Link to="/">Home</Link>
-                            </li>
-                            <li>
-                                <Link to="/Createaccount">Create Account</Link>
-                            </li>
-                            <li>
-                                <Link to="/Login">Login</Link>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+                <ul className="top-nav-item-list">
+                    <li>
+                        <Link className="top-nav-links" to="/">
+                            Home
+                        </Link>
+                    </li>
+                    <li>
+                        <Link className="top-nav-links" to="/Createaccount">
+                            Create Account
+                        </Link>
+                    </li>
+                    <li>
+                        <Link className="top-nav-links" to="/Login">
+                            Login
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
         );
     }
 }
