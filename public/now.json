@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "alias": "ryan-newsletter-app",
+    "name": "newsletter-app",
+    "routes": [
+        {
+            "src": "^/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": ".*",
+            "dest": "/index.html"
+        }
+    ]
+}
