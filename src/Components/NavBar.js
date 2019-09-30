@@ -2,14 +2,39 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default class NavBar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { isClicked: false };
+    }
+
+    openMenu(event) {
+        event.preventDefault();
+        const previousMenuState = this.state.isClicked;
+        this.setState({ isClicked: !previousMenuState });
+    }
+
     render() {
         return (
             <div className="navbar">
                 <nav className="nav">
-                    <div></div>
+                    <div className="hamburger-container" id="hamburger-menu">
+                        <button
+                            className="hamburger"
+                            onClick={event => this.openMenu(event)}
+                        >
+                            <div className="hamburger-line"></div>
+                            <div className="hamburger-line"></div>
+                            <div className="hamburger-line"></div>
+                        </button>
+                    </div>
+
                     <div className="navbar-logo">Weekly NewsFeed</div>
                     <div className="flex-space" />
-                    <div className="nav-items">
+                    <div
+                        className={
+                            !this.state.isClicked ? "nav-items" : "display-menu"
+                        }
+                    >
                         <ul>
                             <li>
                                 <Link to="/">Home</Link>
