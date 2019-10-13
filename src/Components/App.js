@@ -11,31 +11,30 @@ import CreateAccount from "./CreateAccount";
 import HomePage from "./HomePage";
 
 export default class App extends React.Component {
-    render() {
-        return (
-            <div className="app">
-                <nav className="top-nav">
-                    <NavBar />
-                </nav>
-                <main>
-                    <Switch>
-                        <Route exact path="/" component={HomePage} />
-                        <Route path="/Login" component={Login} />
-                        <Route
-                            path="/CreateAccount"
-                            component={CreateAccount}
-                        />
-                        <div className="rss-input-component">
-                            <Route
-                                path="/FetchDataFromRssFeed"
-                                component={FetchDataFromRssFeed}
-                            />
-                        </div>
+  render() {
+    return (
+      <div className="app">
+        <nav className="top-nav">
+          <NavBar />
+        </nav>
+        <main>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/Login" component={Login} />
+            <Route path="/CreateAccount" component={CreateAccount} />
+            {/* <div className="rss-input-component"> */}
 
-                        <Route component={NotFoundPage} />
-                    </Switch>
-                </main>
-            </div>
-        );
-    }
+            <Route
+              path="/FetchDataFromRssFeed"
+              component={FetchDataFromRssFeed}
+            />
+
+            {/* </div> */}
+
+            <Route component={NotFoundPage} />
+          </Switch>
+        </main>
+      </div>
+    );
+  }
 }
