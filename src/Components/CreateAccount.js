@@ -37,25 +37,21 @@ export default class CreateAccount extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.history.push("/FetchDataFromRssFeed");
-    // const { email, password, repeatPassword } = this.state;
-    const newUser = (({ email, password }) => ({ email, password }))(
-      this.state
-    );
-    // console.log("email:", email.value);
-    // console.log("password:", password.value);
-    // console.log("repeatPassword:", repeatPassword.value);
+    const newUser = {
+      email: this.state.email.value,
+      password: this.state.password.value
+    };
+
     fetch("https://aqueous-caverns-36239.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: { "Content-Type": "application/json" }
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error("something went wrong");
-        }
-        return res.json();
-      })
-      .then(data => console.log(data));
+    }).then(res => {
+      if (!res.ok) {
+        throw new Error("something went wrong");
+      }
+      return res.json();
+    });
   }
 
   validateEmail() {

@@ -7,23 +7,34 @@ export default class FetchDataFromRssFeed extends Component {
     this.state = {
       items: [],
       value: "",
-      nameOfLetter: ""
+      newsLetterTitle: ""
     };
-    // fetch(/urls/:user_ref_id).then(response => response.json()).then()
   }
 
   handleChange = e => {
     this.setState({ value: e.target.value });
   };
 
-  handleNameChange = e => {
-    this.setState({ nameOfLetter: e.target.value });
+  handleTitleChange = e => {
+    this.setState({ newsLetterTitle: e.target.value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
     let url = `https://api.rss2json.com/v1/api.json?rss_url=${this.state.value}`;
-    this.parseRSSToJSON(url);
+    const newUrl = { title: this.state.newsLetterTitle, rssUrl: url };
+    fetch("https://aqueous-caverns-36239.herokuapp.com/urls", {
+      method: "POST",
+      body: JSON.stringify(newUrl),
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("Something went wrong!");
+        }
+        res.json();
+      })
+      .then(data => console.log(data));
   };
 
   async parseRSSToJSON(url) {
@@ -56,8 +67,8 @@ export default class FetchDataFromRssFeed extends Component {
             <label htmlFor="newsletter-name">Name of Newsletter</label>
             <input
               type="text"
-              value={this.state.nameOfLetter}
-              onChange={this.handleNameChange}
+              value={this.state.newsLetterTitle}
+              onChange={this.handleTitleChange}
             />
           </div>
           <div className="label-input-wrapper">
@@ -74,7 +85,6 @@ export default class FetchDataFromRssFeed extends Component {
             </button>
           </div>
         </form>
-        <div className="newsletter-title">{this.state.nameOfLetter}</div>
         <ul className="newsletter-list">{arrayOfNewsLetters}</ul>
       </div>
     );
