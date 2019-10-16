@@ -22,7 +22,11 @@ export default class FetchDataFromRssFeed extends Component {
   handleSubmit = e => {
     e.preventDefault();
     let url = `https://api.rss2json.com/v1/api.json?rss_url=${this.state.value}`;
-    const newUrl = { title: this.state.newsLetterTitle, rssUrl: url };
+    const newUrl = {
+      title: this.state.newsLetterTitle,
+      rssUrl: url,
+      user_ref_id: user.id
+    };
     fetch("https://aqueous-caverns-36239.herokuapp.com/urls", {
       method: "POST",
       body: JSON.stringify(newUrl),
