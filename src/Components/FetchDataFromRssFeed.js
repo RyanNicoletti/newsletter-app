@@ -11,6 +11,25 @@ export default class FetchDataFromRssFeed extends Component {
     };
   }
 
+  fetchLetters() {
+    fetch("https://aqueous-caverns-36239.herokuapp.com/urls", {
+      headers: {}
+    }).then(res =>
+      !res.ok
+        ? res.json().then(e => Promise.reject(e))
+        : res.json().then(data =>
+            data.forEach(newsLetter =>
+              fetch(newsLetter.rssurl)
+                .then(res => res.json())
+                .then(data => this.setState({ items: data.items }))
+            )
+          )
+    );
+  }
+  componentDidMount() {
+    this.fetchLetters();
+  }
+
   handleChange = e => {
     this.setState({ value: e.target.value });
   };
@@ -22,40 +41,28 @@ export default class FetchDataFromRssFeed extends Component {
   handleSubmit = e => {
     e.preventDefault();
     let url = `https://api.rss2json.com/v1/api.json?rss_url=${this.state.value}`;
+    // user_ref_id will be hard coded until auth/sessions are added for the sake of time
+    const hardCodedUserId = 1;
     const newUrl = {
       title: this.state.newsLetterTitle,
-      rssUrl: url,
-      user_ref_id: user.id
+      rssurl: url,
+      user_ref_id: hardCodedUserId
     };
     fetch("https://aqueous-caverns-36239.herokuapp.com/urls", {
       method: "POST",
       body: JSON.stringify(newUrl),
       headers: { "Content-Type": "application/json" }
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error("Something went wrong!");
-        }
-        res.json();
-      })
-      .then(data => console.log(data));
+    }).then(res => {
+      if (!res.ok) {
+        throw new Error("Something went wrong!");
+      }
+      res.json();
+    });
   };
-
-  async parseRSSToJSON(url) {
-    try {
-      const response = await fetch(url);
-      const json = await response.json();
-
-      this.setState({ items: json.items });
-      console.log("the function is working");
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   render() {
     const arrayOfNewsLetters = this.state.items.slice(0, 4).map((item, i) => (
-      <div className="newsletter-card">
+      <div className="newsletter-card" key={i}>
         <li key={i} className="item-title">
           {item.title} <br></br>
           <a key={i} className="item-link" href={item.link}>
