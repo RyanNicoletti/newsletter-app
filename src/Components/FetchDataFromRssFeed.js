@@ -7,42 +7,10 @@ export default class FetchDataFromRssFeed extends Component {
     this.state = {
       items: [],
       value: "",
-      newsLetterTitle: ""
+      newsLetterTitle: "",
+      newsletters: []
     };
   }
-
-  // fetchLetters() {
-  //   fetch("https://aqueous-caverns-36239.herokuapp.com/urls", {
-  //     headers: {}
-  //   }).then(res =>
-  //     !res.ok
-  //       ? res.json().then(e => Promise.reject(e))
-  //       : res.json().then(data => {
-  //           let lettersUrlArray = [];
-  //           for (let i = 0; i < data.length; i++) {
-  //             lettersUrlArray.push(data[i].rssurl);
-  //           }
-  //           let uniqueUrls = [...new Set(lettersUrlArray)];
-  //           uniqueUrls.forEach(url =>
-  //             fetch(url)
-  //               .then(res => res.json())
-  //               .then(data => {
-  //                 console.log(data.items);
-  //                 let renderedLetters = [];
-  //                 for (let i in data) {
-  //                   if (i === data[i].url) {
-  //                     renderedLetters.push(data[i].url);
-  //                   }
-  //                 }
-
-  //                 console.log(renderedLetters);
-  //                 // this.setState({ items: data.items });
-  //               })
-  //               .then(data => console.log(data))
-  //           );
-  //         })
-  //   );
-  // }
 
   fetchLetters() {
     fetch("https://aqueous-caverns-36239.herokuapp.com/urls", {
@@ -58,13 +26,27 @@ export default class FetchDataFromRssFeed extends Component {
             console.log(rssUrls);
             let uniqueUrls = [...new Set(rssUrls)];
             console.log(uniqueUrls);
-
-            uniqueUrls.forEach(url => {
-              fetch(url)
+            this.setState({ newsletters: uniqueUrls });
+            let newsLetterArray = [];
+            for (let i = 0; i < this.state.newsletters.length; i++) {
+              fetch(this.state.newsletters[i])
                 .then(res => res.json())
-                .then(data => console.log(data.items));
-              // this.setState({ items: data.items });
-            });
+                .then(data => newsLetterArray.push(data));
+            }
+            this.setState({ items: newsLetterArray });
+            console.log(this.state.items);
+
+            let newsLettersToRender = [];
+            for (let i = 0; i < this.state.items.length; i++) {
+              if (this.state.items[i]) {
+                newsLettersToRender.push(
+                  this.state.items[i].feed.title,
+                  this.state.items[i].items.slice(0, 4).title,
+                  this.state.items[i].items.slice(0, 4).link
+                );
+              }
+            }
+            console.log(newsLettersToRender);
           })
     );
   }
