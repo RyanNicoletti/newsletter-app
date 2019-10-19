@@ -11,21 +11,64 @@ export default class FetchDataFromRssFeed extends Component {
     };
   }
 
+  // fetchLetters() {
+  //   fetch("https://aqueous-caverns-36239.herokuapp.com/urls", {
+  //     headers: {}
+  //   }).then(res =>
+  //     !res.ok
+  //       ? res.json().then(e => Promise.reject(e))
+  //       : res.json().then(data => {
+  //           let lettersUrlArray = [];
+  //           for (let i = 0; i < data.length; i++) {
+  //             lettersUrlArray.push(data[i].rssurl);
+  //           }
+  //           let uniqueUrls = [...new Set(lettersUrlArray)];
+  //           uniqueUrls.forEach(url =>
+  //             fetch(url)
+  //               .then(res => res.json())
+  //               .then(data => {
+  //                 console.log(data.items);
+  //                 let renderedLetters = [];
+  //                 for (let i in data) {
+  //                   if (i === data[i].url) {
+  //                     renderedLetters.push(data[i].url);
+  //                   }
+  //                 }
+
+  //                 console.log(renderedLetters);
+  //                 // this.setState({ items: data.items });
+  //               })
+  //               .then(data => console.log(data))
+  //           );
+  //         })
+  //   );
+  // }
+
   fetchLetters() {
     fetch("https://aqueous-caverns-36239.herokuapp.com/urls", {
       headers: {}
     }).then(res =>
       !res.ok
         ? res.json().then(e => Promise.reject(e))
-        : res.json().then(data =>
-            data.forEach(newsLetter =>
-              fetch(newsLetter.rssurl)
+        : res.json().then(data => {
+            let rssUrls = [];
+            for (let i = 0; i < data.length; i++) {
+              rssUrls.push(data[i].rssurl);
+            }
+            console.log(rssUrls);
+            let uniqueUrls = [...new Set(rssUrls)];
+            console.log(uniqueUrls);
+
+            uniqueUrls.forEach(url => {
+              fetch(url)
                 .then(res => res.json())
-                .then(data => this.setState({ items: data.items }))
-            )
-          )
+                .then(data => console.log(data.items));
+              // this.setState({ items: data.items });
+            });
+          })
     );
   }
+
   componentDidMount() {
     this.fetchLetters();
   }
