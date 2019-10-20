@@ -7,8 +7,7 @@ export default class FetchDataFromRssFeed extends Component {
     this.state = {
       items: [],
       value: "",
-      newsLetterTitle: "",
-      newsletters: []
+      newsLetterTitle: ""
     };
   }
 
@@ -19,34 +18,19 @@ export default class FetchDataFromRssFeed extends Component {
       !res.ok
         ? res.json().then(e => Promise.reject(e))
         : res.json().then(data => {
-            let rssUrls = [];
-            for (let i = 0; i < data.length; i++) {
-              rssUrls.push(data[i].rssurl);
-            }
-            console.log(rssUrls);
-            let uniqueUrls = [...new Set(rssUrls)];
+            let uniqueUrls = [...new Set(data.map(_ => _.rssurl))];
             console.log(uniqueUrls);
-            this.setState({ newsletters: uniqueUrls });
-            let newsLetterArray = [];
-            for (let i = 0; i < this.state.newsletters.length; i++) {
-              fetch(this.state.newsletters[i])
-                .then(res => res.json())
-                .then(data => newsLetterArray.push(data));
-            }
-            this.setState({ items: newsLetterArray });
-            console.log(this.state.items);
+            const newsLetters = uniqueUrls.map(url =>
+              fetch(url).then(_ => _.json())
+            );
+            Promise.all(newsLetters).then(responses => {
+              const items = responses
+                .filter(response => response.status === "ok")
 
-            let newsLettersToRender = [];
-            for (let i = 0; i < this.state.items.length; i++) {
-              if (this.state.items[i]) {
-                newsLettersToRender.push(
-                  this.state.items[i].feed.title,
-                  this.state.items[i].items.slice(0, 4).title,
-                  this.state.items[i].items.slice(0, 4).link
-                );
-              }
-            }
-            console.log(newsLettersToRender);
+                .flatMap(_ => _.items.slice(0, 4));
+              console.log(items);
+              this.setState({ items });
+            });
           })
     );
   }
@@ -85,8 +69,31 @@ export default class FetchDataFromRssFeed extends Component {
     });
   };
 
+  // arrayOfNewsLetter() {
+  //   let arrayofNewsLetters = [];
+  //   for (let i = 0; i < this.state.items.length; i++) {
+  //     for (let j = 0; j < this.state.items[i].length; j++) {
+  //       arrayofNewsLetters.push(
+  //         <div className="newsletter-card" key={i}>
+  //           <li key={i} className="item-title">
+  //             {this.state.items[i][j].title} <br></br>
+  //             <a
+  //               key={i}
+  //               className="item-link"
+  //               href={this.state.items[i][j].link}
+  //             >
+  //               {this.state.items[i][j].link}
+  //             </a>
+  //           </li>
+  //         </div>
+  //       );
+  //     }
+  //   }
+  //   return arrayofNewsLetters;
+  // }
+
   render() {
-    const arrayOfNewsLetters = this.state.items.slice(0, 4).map((item, i) => (
+    const arrayOfNewsLetters = this.state.items.map((item, i) => (
       <div className="newsletter-card" key={i}>
         <li key={i} className="item-title">
           {item.title} <br></br>
