@@ -69,28 +69,28 @@ export default class FetchDataFromRssFeed extends Component {
     });
   };
 
-  // arrayOfNewsLetter() {
-  //   let arrayofNewsLetters = [];
-  //   for (let i = 0; i < this.state.items.length; i++) {
-  //     for (let j = 0; j < this.state.items[i].length; j++) {
-  //       arrayofNewsLetters.push(
-  //         <div className="newsletter-card" key={i}>
-  //           <li key={i} className="item-title">
-  //             {this.state.items[i][j].title} <br></br>
-  //             <a
-  //               key={i}
-  //               className="item-link"
-  //               href={this.state.items[i][j].link}
-  //             >
-  //               {this.state.items[i][j].link}
-  //             </a>
-  //           </li>
-  //         </div>
-  //       );
-  //     }
-  //   }
-  //   return arrayofNewsLetters;
-  // }
+  arrayOfNewsLetter() {
+    let arrayofNewsLetters = [];
+    for (let i = 0; i < this.state.items.length; i++) {
+      for (let j = 0; j < this.state.items[i].length; j++) {
+        arrayofNewsLetters.push(
+          <div className="newsletter-card" key={i}>
+            <li key={i} className="item-title">
+              {this.state.items[i][j].title} <br></br>
+              <a
+                key={i}
+                className="item-link"
+                href={this.state.items[i][j].link}
+              >
+                {this.state.items[i][j].link}
+              </a>
+            </li>
+          </div>
+        );
+      }
+    }
+    return arrayofNewsLetters;
+  }
 
   render() {
     const arrayOfNewsLetters = this.state.items.map((item, i) => (
