@@ -6,17 +6,15 @@ export default class HomePage extends Component {
     return (
       <>
         <header>
-          <h1>A New Place to Get Weekly Newsletters</h1>
-          <h3>All your weekly news letters, in one place.</h3>
+          <h1>Weekly Bundle</h1>
+          <h3>
+            Store all your weekly newsletters in one place and free up your
+            inbox.
+          </h3>
         </header>
         <main>
-          <p>
-            Why use Weekly Bulletin?<br></br>
-            Newsletters are great, but can quickly lead to a cluttered inbox.
-            <br></br>
-            With Weekly Bulletin, you can avoid email spam and get newsletters
-            delivered directly to your home-page.
-          </p>
+          <p>Subscribe to all your favorite weekly newsletters</p>
+          <p>Avoid spam.</p>
           <p>
             Simply copy and paste any URL from the RSS feed of your favorite
             newsletters.
