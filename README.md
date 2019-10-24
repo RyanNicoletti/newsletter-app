@@ -1,3 +1,16 @@
+<h2>Weekly Bundle</h2>
+<p>Weekly Bundle is an app that was made to get newsletters out of your
+inbox and collect them in one place</p>
+
+Try it out:<br>
+Test Username: user123<br>
+Test Password: password123<br>
+
+To add a news letter to your feed, copy and paste a url from an RSS feed<br> into the second input and give it a title<br>
+
+For example: Title: React Weekly<br>
+RSS URL: http://reactjsnewsletter.com/issues.rss
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
