@@ -6,10 +6,12 @@ Try it out:<br>
 Test Username: user123<br>
 Test Password: password123<br>
 
-To add a news letter to your feed, copy and paste a url from an RSS feed into the second input and give it a title<br>
+The test account comes with four newsletters already added.<br>
 
-For example: Title: React Weekly<br>
-RSS URL: http://reactjsnewsletter.com/issues.rss
+To add a new newsletter to your feed, copy and paste a url from an RSS feed into the second input and give it a title<br>
+
+For example: Title: Frontend Focus<br>
+RSS URL: https://frontendfoc.us/rss/1nm7je3m
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
