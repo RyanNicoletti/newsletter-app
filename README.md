@@ -6,7 +6,7 @@ Try it out:<br>
 Test Username: user123<br>
 Test Password: password123<br>
 
-To add a news letter to your feed, copy and paste a url from an RSS feed<br> into the second input and give it a title<br>
+To add a news letter to your feed, copy and paste a url from an RSS feed into the second input and give it a title<br>
 
 For example: Title: React Weekly<br>
 RSS URL: http://reactjsnewsletter.com/issues.rss
