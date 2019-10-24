@@ -7,7 +7,8 @@ export default class FetchDataFromRssFeed extends Component {
     this.state = {
       items: [],
       value: "",
-      newsLetterTitle: ""
+      newsLetterTitle: "",
+      titlesMappedToLetters: []
     };
   }
 
@@ -18,6 +19,10 @@ export default class FetchDataFromRssFeed extends Component {
       !res.ok
         ? res.json().then(e => Promise.reject(e))
         : res.json().then(data => {
+            const feedTitles = [];
+            data.map(feed => feedTitles.push(feed.title));
+            console.log(feedTitles);
+            this.setState({ newsLetterTitle: feedTitles });
             let uniqueUrls = [...new Set(data.map(_ => _.rssurl))];
             console.log(uniqueUrls);
             const newsLetters = uniqueUrls.map(url =>
@@ -27,9 +32,18 @@ export default class FetchDataFromRssFeed extends Component {
               const items = responses
                 .filter(response => response.status === "ok")
 
-                .flatMap(_ => _.items.slice(0, 4));
+                .map(_ => _.items.slice(0, 4));
               console.log(items);
               this.setState({ items });
+              const labeledLetters = this.state.newsLetterTitle.reduce(
+                (obj, key, index) => ({
+                  ...obj,
+                  [key]: this.state.items[index]
+                }),
+                {}
+              );
+              this.setState({ titlesMappedToLetters: labeledLetters });
+              console.log(labeledLetters);
             });
           })
     );
@@ -69,40 +83,24 @@ export default class FetchDataFromRssFeed extends Component {
     });
   };
 
-  arrayOfNewsLetter() {
-    let arrayofNewsLetters = [];
-    for (let i = 0; i < this.state.items.length; i++) {
-      for (let j = 0; j < this.state.items[i].length; j++) {
-        arrayofNewsLetters.push(
+  render() {
+    const titlesArray = Object.keys(this.state.titlesMappedToLetters);
+    const arrayOfNewsLetters = titlesArray.map((title, i) => (
+      <div key={i}>
+        <h2>{title}</h2>
+        {this.state.titlesMappedToLetters[title].map((article, i) => (
           <div className="newsletter-card" key={i}>
             <li key={i} className="item-title">
-              {this.state.items[i][j].title} <br></br>
-              <a
-                key={i}
-                className="item-link"
-                href={this.state.items[i][j].link}
-              >
-                {this.state.items[i][j].link}
+              {article.title} <br></br>
+              <a key={i} className="item-link" href={article.link}>
+                {article.link}
               </a>
             </li>
           </div>
-        );
-      }
-    }
-    return arrayofNewsLetters;
-  }
-
-  render() {
-    const arrayOfNewsLetters = this.state.items.map((item, i) => (
-      <div className="newsletter-card" key={i}>
-        <li key={i} className="item-title">
-          {item.title} <br></br>
-          <a key={i} className="item-link" href={item.link}>
-            {item.link}
-          </a>
-        </li>
+        ))}
       </div>
     ));
+
     return (
       <div className="rss-form">
         <form onSubmit={this.handleSubmit}>
@@ -110,7 +108,7 @@ export default class FetchDataFromRssFeed extends Component {
             <label htmlFor="newsletter-name">Name of Newsletter</label>
             <input
               type="text"
-              value={this.state.newsLetterTitle}
+              // value={this.state.newsLetterTitle}
               onChange={this.handleTitleChange}
             />
           </div>
