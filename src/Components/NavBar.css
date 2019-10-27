@@ -1,78 +1,79 @@
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 .top-menu-icon {
-    position: fixed;
-    top: 15px;
-    right: 20px;
+  position: fixed;
+  top: 15px;
+  right: 20px;
 }
 .top-menu-icon:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 .top-menu- {
-    display: none;
+  display: none;
 }
 
 .nav-item-list {
-    list-style: none;
-    background-color: grey;
-    position: fixed;
-    top: 0;
-    width: 100%;
+  list-style: none;
+  background-color: grey;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .nav-item-list li {
-    text-align: center;
-    margin: 15px auto;
+  text-align: center;
+  margin: 15px auto;
 }
 
 .nav-links {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 .nav-links:hover {
-    cursor: pointer;
-    color: darkblue;
+  cursor: pointer;
+  color: darkblue;
 }
 .top-nav-links,
 .top-nav-item-list {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 @media only screen and (min-width: 600px) {
-    .top-menu-icon,
-    .top-menu-,
-    .top-menu-toggle,
-    .nav-item-list {
-        display: none;
-    }
-    .top-nav-links,
-    .top-nav-item-list {
-        visibility: visible;
-    }
-    .top-nav-item-list {
-        list-style: none;
-        background-color: grey;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: center;
-        height: 3rem;
-        position: fixed;
-        top: 0;
-        width: 100%;
-    }
-    .top-nav-links {
-        text-decoration: none;
-        color: black;
-        padding-left: 10px;
-        padding-right: 30px;
-    }
-    .top-nav-links:hover {
-        cursor: pointer;
-        color: darkblue;
-    }
+  .top-menu-icon,
+  .top-menu-,
+  .top-menu-toggle,
+  .nav-item-list {
+    display: none;
+  }
+  .top-nav-links,
+  .top-nav-item-list {
+    visibility: visible;
+  }
+  .top-nav-item-list {
+    list-style: none;
+    background-color: grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    height: 3rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  .top-nav-links {
+    text-decoration: none;
+    color: black;
+    padding-left: 10px;
+    padding-right: 30px;
+  }
+  .top-nav-links:hover {
+    cursor: pointer;
+    color: darkblue;
+  }
 }

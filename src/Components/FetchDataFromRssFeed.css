@@ -1,10 +1,62 @@
+.rss-form {
+  max-width: 400px;
+  padding: 0px 12px 10px 20px;
+  font: 13px Arial, Helvetica, sans-serif;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.form-heading {
+  font-weight: bold;
+  font-style: italic;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 20px;
+  font-size: 20px;
+  padding-bottom: 3px;
+}
+
+.label-input-wrapper {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.title-input {
+  margin-bottom: 20px;
+}
+
+.url-input {
+  margin-bottom: 15px;
+}
+
+label {
+  width: 100px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+input {
+  width: 48%;
+  box-sizing: border-box;
+  border: 1px solid #c2c2c2;
+  box-shadow: 1px 1px 4px #ebebeb;
+  border-radius: 3px;
+  padding: 7px;
+  outline: none;
+}
+
+input:focus {
+  border: 1px solid black;
+}
+
 .newsletter-list {
   list-style: none;
   display: flex;
   flex-flow: wrap;
-  max-width: 300px;
+  width: 350px;
   margin-right: auto;
   margin-left: auto;
+  background-color: lightgrey;
+  padding: 10px;
 }
 .newsletter-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -12,26 +64,65 @@
   margin: 10px;
   padding: 10px;
   border-radius: 5px;
+  max-width: 300px;
+  background-color: white;
 }
 
-.label-input-wrapper {
-  text-align: center;
+.fetch-newsletter-button {
+  display: block;
+  box-shadow: inset 0px 1px 3px 0px #91b8b3;
+  background: linear-gradient(to bottom, #303333 5%, #262b2b 100%);
+  background-color: #768d87;
+  border-radius: 5px;
+  border: 1px solid #566963;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 5px 16px;
+  text-decoration: none;
+  text-shadow: 0px -1px 0px #2b665e;
+  margin-bottom: 10px;
+}
+
+.fetch-newsletter-button:hover {
+  background: #ea7b00;
+  color: #fff;
+}
+
+.newsletter-title {
+  text-decoration: underline;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.title-with-articles {
+  margin-bottom: 20px;
 }
 
 @media only screen and (min-width: 600px) {
+  .rss-form {
+    max-width: 450px;
+    padding-top: 50px;
+  }
+
   .newsletter-list {
-    max-width: 500px;
+    width: 550px;
   }
   .newsletter-card {
-    width: 500px;
+    max-width: 500px;
   }
 }
 
 @media only screen and (min-width: 992px) {
+  .rss-form {
+    padding-top: 50px;
+  }
   .newsletter-list {
     max-width: 600px;
   }
   .newsletter-card {
-    width: 600px;
+    width: 550px;
   }
 }

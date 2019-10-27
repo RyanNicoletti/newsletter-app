@@ -86,8 +86,8 @@ export default class FetchDataFromRssFeed extends Component {
   render() {
     const titlesArray = Object.keys(this.state.titlesMappedToLetters);
     const arrayOfNewsLetters = titlesArray.map((title, i) => (
-      <div key={i}>
-        <h2>{title}</h2>
+      <div key={i} className="title-with-articles">
+        <h2 className="newsletter-title">{title}</h2>
         {this.state.titlesMappedToLetters[title].map((article, i) => (
           <div className="newsletter-card" key={i}>
             <li key={i} className="item-title">
@@ -102,32 +102,37 @@ export default class FetchDataFromRssFeed extends Component {
     ));
 
     return (
-      <div className="rss-form">
-        <form onSubmit={this.handleSubmit}>
-          <div className="label-input-wrapper">
-            <label htmlFor="newsletter-name">Name of Newsletter</label>
+      <>
+        <div className="rss-form">
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-heading">Add an RSS Feed to Your Account</div>
+            <div className="label-input-wrapper">
+              <label htmlFor="newsletter-name">Add a Title</label>
+            </div>
             <input
               type="text"
-              // value={this.state.newsLetterTitle}
               onChange={this.handleTitleChange}
+              value={this.state.newsLetterTitle}
+              placeholder="ex: Frontend Focus"
+              className="title-input"
             />
-          </div>
-          <div className="label-input-wrapper">
-            <label htmlFor="RSSURL">
-              Add an RSS Feed URL from Your Favorite Newsletters:
-            </label>
+            <div className="label-input-wrapper">
+              <label htmlFor="RSSURL">Add the URL of the RSS Feed</label>
+            </div>
             <input
               type="text"
               value={this.state.value}
               onChange={this.handleChange}
+              placeholder="ex: https://frontendfoc.us/rss/1nm7je3m"
+              className="url-input"
             />
             <button type="submit" className="fetch-newsletter-button">
-              Get News Letter
+              Submit
             </button>
-          </div>
-        </form>
+          </form>
+        </div>
         <ul className="newsletter-list">{arrayOfNewsLetters}</ul>
-      </div>
+      </>
     );
   }
 }
