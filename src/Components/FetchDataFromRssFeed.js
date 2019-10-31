@@ -22,7 +22,7 @@ export default class FetchDataFromRssFeed extends Component {
             const feedTitles = [];
             data.map(feed => feedTitles.push(feed.title));
             console.log(feedTitles);
-            this.setState({ newsLetterTitle: feedTitles });
+            // this.setState({ newsLetterTitle: feedTitles });
             let uniqueUrls = [...new Set(data.map(_ => _.rssurl))];
             console.log(uniqueUrls);
             const newsLetters = uniqueUrls.map(url =>
@@ -35,7 +35,7 @@ export default class FetchDataFromRssFeed extends Component {
                 .map(_ => _.items.slice(0, 4));
               console.log(items);
               this.setState({ items });
-              const labeledLetters = this.state.newsLetterTitle.reduce(
+              const labeledLetters = feedTitles.reduce(
                 (obj, key, index) => ({
                   ...obj,
                   [key]: this.state.items[index]
@@ -117,7 +117,7 @@ export default class FetchDataFromRssFeed extends Component {
               className="title-input"
             />
             <div className="label-input-wrapper">
-              <label htmlFor="RSSURL">Add the URL of the RSS Feed</label>
+              <label htmlFor="RSSURL">Add the URL of an RSS Feed</label>
             </div>
             <input
               type="text"

@@ -1,32 +1,31 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "./homepage.css";
 
 export default class HomePage extends Component {
   render() {
     return (
-      <>
+      <div className="homepage-container">
         <header>
-          <h1>Weekly Bundle</h1>
+          <h1>Newsletter Digest</h1>
           <h3>
             Store all your weekly newsletters in one place and free up your
             inbox.
           </h3>
         </header>
         <main>
-          <p>Subscribe to all your favorite weekly newsletters</p>
-          <p>Avoid spam.</p>
+          <p>Subscribe to your favorite weekly newsletters</p>
           <p>
-            Simply copy and paste any URL from the RSS feed of your favorite
-            newsletters.
+            Simply copy and paste the link to an RSS feed of your favorite
+            newsletters
           </p>
-          <p>
-            Sign up to get started:
-            <Link className="nav-links" to="/Createaccount">
-              Create Account
-            </Link>
-          </p>
+          <Link className="nav-links" to="/Createaccount">
+            <button className="create-account-button">
+              Create An Account To Get Started
+            </button>
+          </Link>
         </main>
-      </>
+      </div>
     );
   }
 }

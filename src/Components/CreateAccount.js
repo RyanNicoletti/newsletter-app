@@ -1,5 +1,6 @@
 import React from "react";
 import ValidationErrorMessage from "./ValidationErrorMessage";
+import "./createaccount.css";
 
 export default class CreateAccount extends React.Component {
   constructor(props) {
@@ -88,14 +89,17 @@ export default class CreateAccount extends React.Component {
     const repeatPasswordError = this.validateRepeatPassword();
     return (
       <form className="registration" onSubmit={e => this.handleSubmit(e)}>
-        <h2>Sign Up</h2>
-        <div className="registration-form-hint">* required field</div>
-        <div className="form-group">
-          <label htmlFor="name">Email *</label>
+        <h2 className="create-account-header">Create An Account</h2>
+        <div className="registration-flex-container">
+          <div className="form-group">
+            <label htmlFor="name" className="create-account-labels">
+              Email *
+            </label>
+          </div>
           <input
             type="text"
             value={this.state.email.value}
-            className="registration-input"
+            className="registration-input-email"
             name="email"
             id="email"
             onChange={e => this.handleEmailChange(e.target.value)}
@@ -105,13 +109,15 @@ export default class CreateAccount extends React.Component {
               message={emailError}
             ></ValidationErrorMessage>
           )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password *</label>
+          <div className="form-group">
+            <label htmlFor="password" className="create-account-labels">
+              Password *
+            </label>
+          </div>
           <input
             type="password"
             value={this.state.password.value}
-            className="registration-input"
+            className="registration-input-pw"
             name="password"
             id="password"
             onChange={e => this.handlePasswordChange(e.target.value)}
@@ -122,13 +128,15 @@ export default class CreateAccount extends React.Component {
           {this.state.password.touched && (
             <ValidationErrorMessage message={passwordError} />
           )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="repeatPassword">Repeat Password *</label>
+          <div className="form-group">
+            <label htmlFor="repeatPassword" className="create-account-labels">
+              Repeat Password*
+            </label>
+          </div>
           <input
             type="password"
             value={this.state.repeatPassword.value}
-            className="registration-input"
+            className="registration-input-repeat-pw"
             name="repeatPassword"
             id="repeatPassword"
             onChange={e => this.handleRepeatPasswordChange(e.target.value)}
@@ -137,6 +145,8 @@ export default class CreateAccount extends React.Component {
             <ValidationErrorMessage message={repeatPasswordError} />
           )}
         </div>
+        <div className="registration-form-hint">* required field</div>
+
         <div className="registration-button-group">
           <button
             type="submit"

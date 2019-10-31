@@ -1,0 +1,73 @@
+.registration {
+  text-align: center;
+  padding: 0 30px 0 30px;
+  margin: 0 auto;
+  max-width: 400px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.6;
+  height: 100vh;
+}
+
+.registration-flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.create-account-header {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.create-account-labels {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: rgb(102, 100, 100);
+}
+
+.registration-input-pw,
+.registration-input-email,
+.registration-input-repeat-pw {
+  background-color: transparent;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0;
+}
+
+.registration-input-pw:focus,
+.registration-input-email:focus,
+.registration-input-repeat-pw .registration-input-email :focus {
+  border-color: #111;
+}
+
+.registration-input-email {
+  margin-bottom: 18px;
+}
+
+.registration-input-pw {
+  margin-bottom: 8px;
+}
+
+.registration-input-repeat-pw {
+  margin-bottom: 8px;
+}
+
+.registration-form-hint {
+  margin-bottom: 18px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.registration-button {
+  padding: 0.5rem 2.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  background: #111;
+  border-radius: 5px;
+}
+button:hover {
+  cursor: pointer;
+}
