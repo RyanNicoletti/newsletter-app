@@ -22,7 +22,6 @@ export default class FetchDataFromRssFeed extends Component {
             const feedTitles = [];
             data.map(feed => feedTitles.push(feed.title));
             console.log(feedTitles);
-            // this.setState({ newsLetterTitle: feedTitles });
             let uniqueUrls = [...new Set(data.map(_ => _.rssurl))];
             console.log(uniqueUrls);
             const newsLetters = uniqueUrls.map(url =>

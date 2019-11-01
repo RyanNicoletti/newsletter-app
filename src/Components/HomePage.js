@@ -7,7 +7,7 @@ export default class HomePage extends Component {
     return (
       <div className="homepage-container">
         <header>
-          <h1>Newsletter Digest</h1>
+          <h1>Newsletters Inbox</h1>
           <h3>
             Store all your weekly newsletters in one place and free up your
             inbox.
