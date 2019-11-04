@@ -50,7 +50,6 @@ export default class NavBar extends React.Component {
         />
 
         <ul className="top-nav-item-list">
-          <li className="app-name">Newsletter Inbox</li>
           <li>
             <Link className="top-nav-links" to="/">
               Home
