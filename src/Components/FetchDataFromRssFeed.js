@@ -8,36 +8,36 @@ export default class FetchDataFromRssFeed extends Component {
       items: [],
       value: "",
       newsLetterTitle: "",
-      titlesMappedToLetters: []
+      titlesMappedToLetters: [],
     };
   }
 
   fetchLetters() {
     fetch("https://aqueous-caverns-36239.herokuapp.com/urls", {
-      headers: {}
-    }).then(res =>
+      headers: {},
+    }).then((res) =>
       !res.ok
-        ? res.json().then(e => Promise.reject(e))
-        : res.json().then(data => {
+        ? res.json().then((e) => Promise.reject(e))
+        : res.json().then((data) => {
             const feedTitles = [];
-            data.map(feed => feedTitles.push(feed.title));
+            data.map((feed) => feedTitles.push(feed.title));
             console.log(feedTitles);
-            let uniqueUrls = [...new Set(data.map(_ => _.rssurl))];
+            let uniqueUrls = [...new Set(data.map((_) => _.rssurl))];
             console.log(uniqueUrls);
-            const newsLetters = uniqueUrls.map(url =>
-              fetch(url).then(_ => _.json())
+            const newsLetters = uniqueUrls.map((url) =>
+              fetch(url).then((_) => _.json())
             );
-            Promise.all(newsLetters).then(responses => {
+            Promise.all(newsLetters).then((responses) => {
               const items = responses
-                .filter(response => response.status === "ok")
+                .filter((response) => response.status === "ok")
 
-                .map(_ => _.items.slice(0, 4));
+                .map((_) => _.items.slice(0, 4));
               console.log(items);
               this.setState({ items });
               const labeledLetters = feedTitles.reduce(
                 (obj, key, index) => ({
                   ...obj,
-                  [key]: this.state.items[index]
+                  [key]: this.state.items[index],
                 }),
                 {}
               );
@@ -52,15 +52,15 @@ export default class FetchDataFromRssFeed extends Component {
     this.fetchLetters();
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ value: e.target.value });
   };
 
-  handleTitleChange = e => {
+  handleTitleChange = (e) => {
     this.setState({ newsLetterTitle: e.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     let url = `https://api.rss2json.com/v1/api.json?rss_url=${this.state.value}`;
     // user_ref_id will be hard coded until auth/sessions are added for the sake of time
@@ -68,13 +68,13 @@ export default class FetchDataFromRssFeed extends Component {
     const newUrl = {
       title: this.state.newsLetterTitle,
       rssurl: url,
-      user_ref_id: hardCodedUserId
+      user_ref_id: hardCodedUserId,
     };
     fetch("https://aqueous-caverns-36239.herokuapp.com/urls", {
       method: "POST",
       body: JSON.stringify(newUrl),
-      headers: { "Content-Type": "application/json" }
-    }).then(res => {
+      headers: { "Content-Type": "application/json" },
+    }).then((res) => {
       if (!res.ok) {
         throw new Error("Something went wrong!");
       }
@@ -84,10 +84,10 @@ export default class FetchDataFromRssFeed extends Component {
 
   render() {
     const titlesArray = Object.keys(this.state.titlesMappedToLetters);
-    const arrayOfNewsLetters = titlesArray.map((title, i) => (
+    const arrayOfNewsLetters = titlesArray?.map((title, i) => (
       <div key={i} className="title-with-articles">
         <h2 className="newsletter-title">{title}</h2>
-        {this.state.titlesMappedToLetters[title].map((article, i) => (
+        {this.state.titlesMappedToLetters[title]?.map((article, i) => (
           <div className="newsletter-card" key={i}>
             <li key={i} className="item-title">
               {article.title} <br></br>
@@ -104,7 +104,9 @@ export default class FetchDataFromRssFeed extends Component {
       <>
         <div className="rss-form">
           <form onSubmit={this.handleSubmit}>
-            <div className="form-heading">Add an RSS Feed to Your Account</div>
+            <div className="form-heading">
+              Add an RSS Feed to Your Account
+            </div>
             <div className="label-input-wrapper">
               <label htmlFor="newsletter-name">Add a Title</label>
             </div>
