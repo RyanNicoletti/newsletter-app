@@ -13,7 +13,7 @@ export default class FetchDataFromRssFeed extends Component {
   }
 
   fetchLetters() {
-    fetch("https://aqueous-caverns-36239.herokuapp.com/urls", {
+    fetch("https://intense-retreat-46919.herokuapp.com/urls", {
       headers: {},
     }).then((res) =>
       !res.ok
@@ -70,7 +70,7 @@ export default class FetchDataFromRssFeed extends Component {
       rssurl: url,
       user_ref_id: hardCodedUserId,
     };
-    fetch("https://aqueous-caverns-36239.herokuapp.com/urls", {
+    fetch("https://intense-retreat-46919.herokuapp.com/urls", {
       method: "POST",
       body: JSON.stringify(newUrl),
       headers: { "Content-Type": "application/json" },
@@ -90,9 +90,9 @@ export default class FetchDataFromRssFeed extends Component {
         {this.state.titlesMappedToLetters[title].map((article, i) => (
           <div className="newsletter-card" key={i}>
             <li key={i} className="item-title">
-              {article.title} <br></br>
-              <a key={i} className="item-link" href={article.link}>
-                {article.link}
+              {article?.title} <br></br>
+              <a key={i} className="item-link" href={article?.link}>
+                {article?.link}
               </a>
             </li>
           </div>

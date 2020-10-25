@@ -8,16 +8,16 @@ export default class CreateAccount extends React.Component {
     this.state = {
       email: {
         value: "",
-        touched: false
+        touched: false,
       },
       password: {
         value: "",
-        touched: false
+        touched: false,
       },
       repeatPassword: {
         value: "",
-        touched: false
-      }
+        touched: false,
+      },
     };
   }
 
@@ -31,7 +31,7 @@ export default class CreateAccount extends React.Component {
 
   handleRepeatPasswordChange(repeatPassword) {
     this.setState({
-      repeatPassword: { value: repeatPassword, touched: true }
+      repeatPassword: { value: repeatPassword, touched: true },
     });
   }
 
@@ -40,14 +40,14 @@ export default class CreateAccount extends React.Component {
     this.props.history.push("/FetchDataFromRssFeed");
     const newUser = {
       email: this.state.email.value,
-      password: this.state.password.value
+      password: this.state.password.value,
     };
 
-    fetch("https://aqueous-caverns-36239.herokuapp.com/users", {
+    fetch("https://intense-retreat-46919.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(newUser),
-      headers: { "Content-Type": "application/json" }
-    }).then(res => {
+      headers: { "Content-Type": "application/json" },
+    }).then((res) => {
       if (!res.ok) {
         throw new Error("something went wrong");
       }
@@ -88,7 +88,10 @@ export default class CreateAccount extends React.Component {
     const passwordError = this.validatePassword();
     const repeatPasswordError = this.validateRepeatPassword();
     return (
-      <form className="registration" onSubmit={e => this.handleSubmit(e)}>
+      <form
+        className="registration"
+        onSubmit={(e) => this.handleSubmit(e)}
+      >
         <h2 className="create-account-header">Create An Account</h2>
         <div className="registration-flex-container">
           <div className="form-group">
@@ -102,7 +105,7 @@ export default class CreateAccount extends React.Component {
             className="registration-input-email"
             name="email"
             id="email"
-            onChange={e => this.handleEmailChange(e.target.value)}
+            onChange={(e) => this.handleEmailChange(e.target.value)}
           />
           {this.state.email.touched && (
             <ValidationErrorMessage
@@ -120,7 +123,7 @@ export default class CreateAccount extends React.Component {
             className="registration-input-pw"
             name="password"
             id="password"
-            onChange={e => this.handlePasswordChange(e.target.value)}
+            onChange={(e) => this.handlePasswordChange(e.target.value)}
           />
           <div className="registration-form-hint">
             6 to 70 characters, must include a number
@@ -129,7 +132,10 @@ export default class CreateAccount extends React.Component {
             <ValidationErrorMessage message={passwordError} />
           )}
           <div className="form-group">
-            <label htmlFor="repeatPassword" className="create-account-labels">
+            <label
+              htmlFor="repeatPassword"
+              className="create-account-labels"
+            >
               Repeat Password*
             </label>
           </div>
@@ -139,7 +145,9 @@ export default class CreateAccount extends React.Component {
             className="registration-input-repeat-pw"
             name="repeatPassword"
             id="repeatPassword"
-            onChange={e => this.handleRepeatPasswordChange(e.target.value)}
+            onChange={(e) =>
+              this.handleRepeatPasswordChange(e.target.value)
+            }
           />
           {this.state.repeatPassword.touched && (
             <ValidationErrorMessage message={repeatPasswordError} />

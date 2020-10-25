@@ -1,3 +1,3 @@
 export default {
-  API_ENDPOINT: `https://aqueous-caverns-36239.herokuapp.com/`
+  API_ENDPOINT: `https://intense-retreat-46919.herokuapp.com/`,
 };
