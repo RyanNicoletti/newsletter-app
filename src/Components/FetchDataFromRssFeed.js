@@ -63,8 +63,8 @@ export default class FetchDataFromRssFeed extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     let url = `https://api.rss2json.com/v1/api.json?rss_url=${this.state.value}`;
-    // user_ref_id will be hard coded until auth/sessions are added for the sake of time
-    const hardCodedUserId = 1;
+    // user_ref_id will be hard coded until auth/sessions are added
+    const hardCodedUserId = 2;
     const newUrl = {
       title: this.state.newsLetterTitle,
       rssurl: url,
