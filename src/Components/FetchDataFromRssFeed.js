@@ -84,10 +84,10 @@ export default class FetchDataFromRssFeed extends Component {
 
   render() {
     const titlesArray = Object.keys(this.state.titlesMappedToLetters);
-    const arrayOfNewsLetters = titlesArray?.map((title, i) => (
+    const arrayOfNewsLetters = titlesArray.map((title, i) => (
       <div key={i} className="title-with-articles">
         <h2 className="newsletter-title">{title}</h2>
-        {this.state.titlesMappedToLetters[title]?.map((article, i) => (
+        {this.state.titlesMappedToLetters[title].map((article, i) => (
           <div className="newsletter-card" key={i}>
             <li key={i} className="item-title">
               {article.title} <br></br>
