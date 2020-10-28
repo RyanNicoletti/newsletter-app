@@ -50,6 +50,7 @@ export default class FetchDataFromRssFeed extends Component {
 
   componentDidMount() {
     this.fetchLetters();
+    this.forceUpdate()
   }
 
   handleChange = (e) => {
